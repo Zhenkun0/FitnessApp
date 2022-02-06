@@ -1,5 +1,7 @@
 # FitnessApp
 
+### Setup
+
 execute the command below to run django project
 
 ```
