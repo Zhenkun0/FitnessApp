@@ -1,0 +1,89 @@
+{% extends 'base1.html' %}
+
+{% load static %}
+
+{% block head %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/main1.css' %}">
+
+{% endblock %}
+
+
+{% block body %}
+
+
+
+{% if user.trainee %}
+<!-- Small boxes (Stat box) -->
+<div class="row" onload="bmi()">
+  <div class="col-lg-3 col-md-6 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-aqua" style="border: 1px solid black">
+      <div class="inner">
+        <h3>{{ user.trainee.current_weight }}</h3>
+        <h2>Body Weight</h2>
+      </div>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 cold-md-6 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-green" style="border: 1px solid black">
+      <div class="inner">
+        <h3>{{ user.trainee.body_fat }}<sup style="font-size: 20px">%</sup></h3>
+        <h2>Body Fat</h2>
+      </div>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-md-6 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-yellow" style="border: 1px solid black">
+      <div class="inner">
+        <h3 id="user_bmi">N/A</h3>
+        <h2>BMI</h2>
+      </div>
+    </div>
+  </div>
+  <!-- ./col -->
+  {% endif %}
+
+</div>
+<br />
+<br />
+<br />
+<br />
+<!-- /.row -->
+        <div class="b-workouts-channel--top--jump-menus">
+          <div class="b-workouts-channel--top--jump-menu b--fr">
+            <select class="workouts-jump-menus select--replaced" onchange="location=this.options[this.selectedIndex].value;">
+              <option value="" >Browse by Workout Type</option>
+              <option >Balance</option>
+              <option >Bodyweight</option>
+              <option >Cardio</option>
+              <option >Pylometric</option>
+              <option >Power</option>
+              <option >Prehab</option>
+              <option >Strength training</option>
+              <option >Stretching</option>
+              <option >Warmup</option>
+            </select>
+          </div>
+          <div class="b-workouts-channel--top--jump-menu b--fl">
+            <select class="workouts-jump-menus select--replaced" onchange="location=this.options[this.selectedIndex].value;">
+              <option value="">Browse by Skill Level</option>
+              <option >Beginner</option>
+              <option >Intermediate</option>
+              <option >Advanced</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <br /><br />
+{#  <a href="{% url "seetask" %}" class="btn btn-primary" style="width:100%">See all Task</a>#}
+</div>
+
+{% endblock %}
