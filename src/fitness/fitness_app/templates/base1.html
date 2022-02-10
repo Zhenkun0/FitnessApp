@@ -10,7 +10,7 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="{% static '/img/favicon-32x32.png' %}">
 	<link rel="icon" type="image/png" sizes="16x16" href="{% static '/img/favicon-16x16.png' %}">
 	<link rel="manifest" href="{% static '/img/site.webmanifest' %}">
-	<title>FitMe</title>
+	<title>App Name Here</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<!-- Bootstrap 3.3.7 -->
@@ -71,7 +71,7 @@
 			<a href="#" class="logo">
 				<!-- mini logo for sidebar mini 50x50 pixels -->
 				<!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><b>FitMe</b></span>
+				<span class="logo-lg"><b>App Name Here</b></span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">
@@ -170,9 +170,15 @@
 
 						<!-- User Account: style can be found in dropdown.less -->
 						<li class="dropdown user user-menu">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<img src="{{user.trainee.image.url}}" class="user-image" alt="User Image">
+								<span class="hidden-xs">{{ user  }}</span>
+							</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
 								<li class="user-header">
+									<img src="{{user.trainee.image.url}}" class="img-circle" alt="User Image">
+
 									<p>
 										{{user.username}}
 										<small></small>
@@ -181,9 +187,6 @@
 
 								<!-- Menu Footer-->
 								<li class="user-footer">
-									<div class="pull-left">
-{#										<a href="{% url 'TraineeProfile' %}" class="btn btn-default btn-flat">Profile</a>#}
-									</div>
 									<div class="pull-right">
 										<a href="{% url 'logout' %}" class="btn btn-default btn-flat">Sign out</a>
 									</div>

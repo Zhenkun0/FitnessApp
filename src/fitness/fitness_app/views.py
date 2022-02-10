@@ -9,6 +9,7 @@ from user.models import *
 from .models import *
 from .forms import *
 
+
 def home(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -81,8 +82,7 @@ def home(request):
             except:
                 task = None
             data = {"task": task}
-            # TODO create home view
-            return render(request, "index.html", data)
+            return render(request, "first.html", data)
 
 
 def about(request):
