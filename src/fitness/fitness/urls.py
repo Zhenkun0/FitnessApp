@@ -16,8 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from django_registration.backends.one_step.views import RegistrationView
+
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("user.urls")),
-    # path("user/", include("user.urls")),
+    path("api/", include("user.api.urls")),
 ]
