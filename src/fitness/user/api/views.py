@@ -2,11 +2,21 @@ from django.shortcuts import render
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializer import TraineeSerializer
+from rest_framework import generics, permissions, mixins
+
+from .serializers import *
 
 
-class CurrentTraineeAPIView(APIView):
+# Register API
+class TraineeRegisterApiView(generics.GenericAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = TraineeSerializer
 
-    def get(self, request):
-        serializer = TraineeSerializer(request.user)
-        return Response(serializer.data)
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        trainee = serializer.save()
+        return Response({
+            "trainee": TraineeSerializer(trainee, context=self.get_serializer_context()).data,
+            "message": "Trainee Created Successfully.  Now perform Login to get your token",
+        })

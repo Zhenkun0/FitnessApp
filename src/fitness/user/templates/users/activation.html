@@ -1,0 +1,18 @@
+{% block subject %}
+Registration
+{% endblock subject %}
+
+{% block text_body %}
+{{ name }}
+
+Thank you for registration!
+
+Please enter the link.
+{{ protocol }}://{{ domain }}/{{ url|safe }}
+
+--------------------------------------
+UJourny
+--------------------------------------
+
+{% endblock text_body %}
+

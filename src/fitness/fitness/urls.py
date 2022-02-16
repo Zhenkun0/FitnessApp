@@ -17,8 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 
 from django_registration.backends.one_step.views import RegistrationView
+from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("user.api.urls")),
+    path('api/auth/', include('djoser.urls')),
+    path('api/auth/', include('djoser.urls.jwt')),
 ]
