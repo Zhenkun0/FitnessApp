@@ -24,7 +24,7 @@ class ActivationEmail(EmailManager):
     def get_context_data(self):
         context = super().get_context_data()
         user = context.get("user")
-        context["name"] = user.name
+        context["name"] = user.user_name
         context["uid"] = utils.encode_uid(user.pk)
         context["token"] = default_token_generator.make_token(user)
         context["url"] = settings.DJOSER["ACTIVATION_URL"].format(**context)
@@ -37,6 +37,6 @@ class ConfirmationEmail(EmailManager):
     def get_context_data(self):
         context = super().get_context_data()
         user = context.get("user")
-        context["name"] = user.name
+        context["name"] = user.user_name
         return context
 

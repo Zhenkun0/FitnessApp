@@ -144,23 +144,75 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 AUTH_USER_MODEL = 'user.Trainee'
 
-# # Previous settings ...
+# ローカル確認用
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# 本番環境用
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = env('EMAIL_HOST')
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-#
-# # Custom setting. To email
-# RECIPIENT_ADDRESS = env('RECIPIENT_ADDRESS')
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = ''
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASS' : (
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+    'DEFAULT_AUTHENTICATION_CLASS': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    'DEFAULT_PERMISSION_CLASS' : (
-        'rest_framework.permissions.ISAuthenticated',
+    'DEFAULT_PERMISSION_CLASS': (
+        'rest_framework.permissions.IsAuthenticated',
     )
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=3),
+    'AUTH_HEADER_TYPES': ('JWT', ),
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken', )
+}
+
+DJOSER = {
+    # メールアドレスでログイン
+    'LOGIN_FIELD': 'email',
+    # アカウント本登録メール
+    'SEND_ACTIVATION_EMAIL': True,
+    # アカウント本登録完了メール
+    'SEND_CONFIRMATION_EMAIL': True,
+    # メールアドレス変更完了メール
+    'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
+    # パスワード変更完了メール
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    # アカウント登録時に確認用パスワード必須
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    # メールアドレス変更時に確認用メールアドレス必須
+    'SET_USERNAME_RETYPE': True,
+    # パスワード変更時に確認用パスワード必須
+    'SET_PASSWORD_RETYPE': True,
+    # アカウント本登録用URL
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    # メールアドレスリセット完了用URL
+    'USERNAME_RESET_CONFIRM_URL': 'email/reset/confirm/{uid}/{token}',
+    # パスワードリセット完了用URL
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+    # カスタムユーザー用シリアライザー
+    'SERIALIZERS': {
+        'user_create': 'user.api.serializers.TraineeRegisterSerializer',
+        'user': 'user.api.serializers.TraineeRegisterSerializer',
+        'current_user': 'user.api.serializers.TraineeRegisterSerializer',
+    },
+    'EMAIL': {
+        # アカウント本登録
+        'activation': 'user.email.ActivationEmail',
+        # アカウント本登録完了
+        'confirmation': 'user.email.ConfirmationEmail',
+        # パスワードリセット
+        'password_reset': 'user.email.PasswordResetEmail',
+        # パスワードリセット完了
+        'password_changed_confirmation': 'user.email.PasswordChangedConfirmationEmail',
+        # メールアドレスリセット
+        'username_reset': 'user.email.UsernameResetEmail',
+        # メールアドレスリセット完了
+        'username_changed_confirmation': 'user.email.UsernameChangedConfirmationEmail',
+    },
 }
