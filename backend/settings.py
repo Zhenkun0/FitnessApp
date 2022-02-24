@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     "corsheaders",
+    'drf_yasg',
 
     'base.apps.BaseConfig',
 ]
@@ -63,6 +64,7 @@ REST_FRAMEWORK = {
     )
 }
 
+CORS_ORIGIN_ALLOW_ALL = True
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
