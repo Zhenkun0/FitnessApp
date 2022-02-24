@@ -8,7 +8,6 @@ from django.contrib.auth.models import User
 
 class Trainer(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    name = models.CharField(max_length=200, null=True, blank=True)
     first_name = models.CharField(max_length=200, null=True, blank=True)
     last_name = models.CharField(max_length=200, null=True, blank=True)
     image = models.ImageField(null=True, blank=True,
@@ -25,7 +24,7 @@ class Trainer(models.Model):
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
-        return self.name
+        return self.first_name
 
 
 class Review(models.Model):
