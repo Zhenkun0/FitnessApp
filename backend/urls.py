@@ -40,6 +40,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users/', include('base.urls.users')),
     path('api/trainers/', include('base.urls.trainers')),
+    path('api/orders/', include('base.urls.orders')),
 
     # swagger urls
     re_path('swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),     # Swagger-Editor用 json or yaml形式 ダウンロード
