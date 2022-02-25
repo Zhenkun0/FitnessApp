@@ -1,5 +1,7 @@
 # FitnessApp
 
+**Please do not push this main branch !!!!!!!
+
 ### Setup
 
 execute requirements.txt
