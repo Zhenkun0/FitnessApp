@@ -8,6 +8,8 @@ execute requirements.txt
 pip3 install -r requirements.txt 
 ```
 
+If it is fail, you can you use anaconda, and install third package yourself.
+
 ### Run
 
 execute the command below to run django project
