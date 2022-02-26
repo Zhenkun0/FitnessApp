@@ -1,5 +1,6 @@
 from django.contrib.auth.hashers import make_password
 from django.shortcuts import render
+from drf_yasg.utils import swagger_auto_schema
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
@@ -13,6 +14,7 @@ from rest_framework import status
 from base.serializer import TrainerSerializer, OrderSerializer
 
 
+@swagger_auto_schema(methods=['post'], request_body=OrderSerializer)
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def addOrderItems(request):

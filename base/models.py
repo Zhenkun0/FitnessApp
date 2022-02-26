@@ -22,6 +22,7 @@ class Trainer(models.Model):
         max_digits=7, decimal_places=2, null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     _id = models.AutoField(primary_key=True, editable=False)
+    countInStock = models.IntegerField(null=True, blank=True, default=0)
 
     def __str__(self):
         return self.first_name
