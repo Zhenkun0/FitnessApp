@@ -4,7 +4,7 @@ from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 
 # from backend.base.models import UserProfile
-from .models import Order, OrderItem, Review, ShippingAddress, Trainer, UserDetails
+from .models import Order, OrderItem, Review, BillingAddress, Trainer, UserProfile
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -64,7 +64,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     orderItems = serializers.SerializerMethodField(read_only=True)
-    shippingAddress = serializers.SerializerMethodField(read_only=True)
+    BillingAddress = serializers.SerializerMethodField(read_only=True)
     # reviews = serializers.SerializerMethodField(read_only=True)
     user = serializers.SerializerMethodField(read_only=True)
 
@@ -77,9 +77,9 @@ class OrderSerializer(serializers.ModelSerializer):
         serializer = OrderItemSerializer(items, many=True)
         return serializer.data
 
-    def get_shippingAddress(self, obj):
+    def get_billingAddress(self, obj):
         try:
-            address = ShippingAddressSerializer(obj.shippingAddress, many=False)
+            address = BillingAddressSerializer(obj.shippingAddress, many=False)
         except:
             address = False
         return address
@@ -96,7 +96,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ShippingAddressSerializer(serializers.ModelSerializer):
+class BillingAddressSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ShippingAddress
+        model = BillingAddress
         fields = '__all__'

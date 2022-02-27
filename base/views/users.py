@@ -18,7 +18,6 @@ from drf_yasg.utils import swagger_auto_schema
 
 user_response = openapi.Response('response description', UserSerializer)
 
-
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
