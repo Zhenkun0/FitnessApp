@@ -65,7 +65,6 @@ class ReviewSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     orderItems = serializers.SerializerMethodField(read_only=True)
     BillingAddress = serializers.SerializerMethodField(read_only=True)
-    # reviews = serializers.SerializerMethodField(read_only=True)
     user = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
@@ -100,3 +99,16 @@ class BillingAddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = BillingAddress
         fields = '__all__'
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    user = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = UserProfile
+        fields = '__all__'
+
+    def get_user(self, obj):
+        user = obj.user
+        serializer = UserSerializer(user, many=False)
+        return serializer.data

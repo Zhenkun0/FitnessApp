@@ -106,7 +106,7 @@ def uploadImage(request):
 @swagger_auto_schema(methods=['delete'], manual_parameters=[param_id])
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
-def deleteTrainer(request, pk,):
+def deleteTrainer(request, pk):
     trainer = Trainer.objects.get(_id=pk)
     trainer.delete()
     return Response({'Trainer delete'})

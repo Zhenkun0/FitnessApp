@@ -13,6 +13,8 @@ class Trainer(models.Model):
     image = models.ImageField(null=True, blank=True,
                               default='/placeholder.png')
     training_style = models.CharField(max_length=50, default='PowerLifting')
+    # TODO
+    # create trainers course and category needs to search trainer
     category = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     rating = models.DecimalField(
@@ -48,6 +50,7 @@ class UserProfile(models.Model):
     training_style = models.CharField(max_length=50, default='PowerLifting')
     dob = models.DateField(default=date.today)
     gender = models.CharField(max_length=6, default="Male")
+    _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
         return str(self.user)
