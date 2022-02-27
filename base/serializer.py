@@ -76,7 +76,7 @@ class OrderSerializer(serializers.ModelSerializer):
         serializer = OrderItemSerializer(items, many=True)
         return serializer.data
 
-    def get_billingAddress(self, obj):
+    def get_BillingAddress(self, obj):
         try:
             address = BillingAddressSerializer(obj.shippingAddress, many=False)
         except:
