@@ -138,11 +138,7 @@ def createTrainerReview(request):
         reviews = trainer.review_set.all()
         trainer.numReviews = len(reviews)
 
-        total = 0
-        for r in reviews:
-            total += r
-
-        rating = total/len(reviews)
+        rating = sum(reviews)/len(reviews)
         trainer.rating = rating
         trainer.save()
 
