@@ -88,11 +88,11 @@ def registerUser(request):
 @permission_classes([IsAuthenticated])
 def getUserProfile(request):
     user = request.user
-    serializer = UserProfileSerializer(user, many=False)
+    serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
 
 
-@swagger_auto_schema(methods=['post'], request_body=UserProfileSerializer)
+@swagger_auto_schema(methods=['post'], request_body=UserSerializer)
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def createProfile(request):
@@ -107,7 +107,7 @@ def createProfile(request):
         dob=data['dob'],
         gender=data['gender'],
     )
-    serializer = UserProfileSerializer(user_profile, many=False)
+    serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
 
 

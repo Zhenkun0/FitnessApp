@@ -11,10 +11,11 @@ class UserSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(read_only=True)
     _id = serializers.SerializerMethodField(read_only=True)
     isAdmin = serializers.SerializerMethodField(read_only=True)
+    user_profile = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
-        fields = ['id', '_id', 'username', 'name', 'email', 'first_name', 'last_name', 'isAdmin']
+        fields = ['id', '_id', 'username', 'name', 'email', 'first_name', 'last_name', 'isAdmin', 'user_profile']
 
     def get__id(self, obj):
         return obj.id
@@ -23,11 +24,15 @@ class UserSerializer(serializers.ModelSerializer):
         return obj.is_staff
 
     def get_name(self, obj):
-        name = obj.first_name
+        name = obj.first_name + ' ' + obj.last_name
         if name == '':
             name = obj.email
 
         return name
+
+    def get_user_profile(self, obj):
+        serializer = UserProfileSerializer(obj.user_profile, many=False)
+        return serializer.data
 
 
 class UserSerializerWithToken(UserSerializer):
@@ -78,7 +83,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     def get_BillingAddress(self, obj):
         try:
-            address = BillingAddressSerializer(obj.shippingAddress, many=False)
+            address = BillingAddressSerializer(obj.billing_address, many=False)
         except:
             address = False
         return address
@@ -102,13 +107,6 @@ class BillingAddressSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
-    user = serializers.SerializerMethodField(read_only=True)
-
     class Meta:
         model = UserProfile
         fields = '__all__'
-
-    def get_user(self, obj):
-        user = obj.user
-        serializer = UserSerializer(user, many=False)
-        return serializer.data
